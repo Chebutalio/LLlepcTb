@@ -1,0 +1,9 @@
+<p>dashboard works!</p>
+
+<a mat-mini-fab routerLink="/adding" routerLinkActive="active" color="warn"
+  class="float-button"
+  [class.mat-elevation-z2]="!isOver"
+  [class.mat-elevation-z8]="isOver"
+  (mouseover)="isOver = true"
+  (mouseleave)="isOver = false">
+  <mat-icon>add</mat-icon></a>

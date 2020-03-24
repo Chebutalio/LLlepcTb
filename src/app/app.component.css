@@ -1,0 +1,13 @@
+.logo {
+  text-decoration: none;
+}
+
+.logo:hover,
+.logo:active {
+  cursor: pointer;
+  color: #FFF;
+}
+
+.logo:visited {
+  color: #FFF;
+}
