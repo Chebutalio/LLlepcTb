@@ -2,12 +2,14 @@
   <!-- *ngIf="!post; else forminfo" novalidate -->
   <form [formGroup]="form" (ngSubmit)="submit()" class="form">
 
+    <div class="form-element">
+      <button mat-raised-button color="accent" type="btn" class="button">Додати фото</button>
+    </div>
+
     <!-- Animal name -->
     <mat-form-field class="form-element">
       <input matInput placeholder="Кличка" formControlName="animalName">
-      <!-- <mat-error></mat-error> -->
-      <!-- *ngIf="!animalName.valid"
-      {{ getErrorName() }} -->
+      <mat-error *ngIf="form.get('animalName').invalid && form.get('animalName').touched">Має бути більше 3-х символів</mat-error>
     </mat-form-field>
 
     <!-- Kind of animal -->
@@ -16,9 +18,7 @@
         <mat-option value="Собака">Собака</mat-option>
         <mat-option value="Кішка">Кішка</mat-option>
       </mat-select>
-      <!-- <mat-error></mat-error> -->
-      <!-- *ngIf="animalKind"
-      {{ titleAlert }} -->
+      <mat-error *ngIf="form.get('animalKind').invalid && form.get('animalKind').touched">Обов'язкове поле</mat-error>
     </mat-form-field>
 
     <!-- Age -->
@@ -37,9 +37,8 @@
     <!-- Animal breed -->
     <mat-form-field class="form-element">
       <input matInput placeholder="Порода" formControlName="animalBreed">
-      <mat-error ></mat-error>
-      <!-- *ngIf="!animalBreed.valid"
-      {{ getErrorName() }} -->
+      <mat-error *ngIf="form.get('animalBreed').invalid && form.get('animalBreed').touched">Має
+        бути більше 3-х символів</mat-error>
     </mat-form-field>
 
     <!-- Arrival date -->
@@ -47,9 +46,9 @@
       <input matInput [matDatepicker]="picker" placeholder="*Дата прибуття" formControlName="arrivalDate" readonly (click)="picker.open()">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <mat-error ></mat-error>
-      <!-- *ngIf="arrivalDate"
-      {{ titleAlert }} -->
+      <mat-error
+        *ngIf="form.get('arrivalDate').invalid && form.get('arrivalDate').touched">
+        Обов'язкове поле</mat-error>
     </mat-form-field>
 
     <!-- weight -->
@@ -60,11 +59,15 @@
     <!-- Animal wool -->
     <mat-form-field class="form-element">
       <input matInput placeholder="Шерсть" formControlName="animalWool">
+      <mat-error *ngIf="form.get('animalWool').invalid && form.get('animalWool').touched">Має
+        бути більше 3-х символів</mat-error>
     </mat-form-field>
 
     <!-- Animal color -->
     <mat-form-field class="form-element">
       <input matInput placeholder="Окрас" formControlName="animalColor">
+      <mat-error *ngIf="form.get('animalColor').invalid && form.get('animalColor').touched">Має
+        бути більше 3-х символів</mat-error>
     </mat-form-field>
 
     <!-- Submite button -->
