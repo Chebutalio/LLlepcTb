@@ -1,4 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+export interface Pet {
+  id?: number;
+  name: string;
+  kindOfAnimal: string;
+  age: number;
+  sex: string;
+  breed: string;
+  dateOfEntry: string;
+  weight: number;
+  wool: string;
+  color: string;
+  image_data: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +22,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  pets: Pet[] = [];
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get<Pet[]>('http://localhost:3000/pet')
+      .subscribe(pets => {
+          this.pets = pets;
+          console.log(pets);
+        }
+      );
   }
 
 }

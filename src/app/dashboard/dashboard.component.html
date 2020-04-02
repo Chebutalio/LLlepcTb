@@ -1,4 +1,15 @@
-<p>dashboard works!</p>
+<mat-card class="pet-card" *ngFor="let pet of pets">
+  <img mat-card-image src="{{pet.image_data}}" alt="">
+  <mat-card-header>
+    <mat-card-title>{{pet.name}}</mat-card-title>
+    <mat-card-subtitle>{{pet.breed}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{pet.age}}</p>
+    <p>{{pet.sex}}</p>
+    <button mat-button>Деталі</button>
+  </mat-card-content>
+</mat-card>
 
 <a mat-mini-fab routerLink="/adding" routerLinkActive="active" color="warn"
   class="float-button"
