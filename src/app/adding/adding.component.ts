@@ -18,17 +18,16 @@ export class AddingComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      animalPhoto: new FormControl(''),
-      animalName: new FormControl('', Validators.minLength(3)),
-      animalKind: new FormControl('', Validators.required),
-      animalAge: new FormControl(''),
-      animalGender: new FormControl(''),
-      animalBreed: new FormControl('', Validators.minLength(3)),
-      arrivalDate: new FormControl('', Validators.required),
-      animalWeight: new FormControl(''),
-      animalWool: new FormControl('', Validators.minLength(3)),
-      animalColor: new FormControl('', Validators.minLength(3))
-    })
+      name: new FormControl('', Validators.minLength(3)),
+      kindOfAnimal: new FormControl('', Validators.required),
+      age: new FormControl(''),
+      sex: new FormControl(''),
+      breed: new FormControl('', Validators.minLength(3)),
+      dateOfEntry: new FormControl('', Validators.required),
+      weight: new FormControl(''),
+      wool: new FormControl('', Validators.minLength(3)),
+      color: new FormControl('', Validators.minLength(3))
+    });
   }
 
   fileChangeEvent(fileInput: any) {
@@ -47,16 +46,22 @@ export class AddingComponent implements OnInit {
         this.imageBase64 = imgBase64Path;
         this.isImageSaved = true;
         // console.log(this.imageBase64);
-      }
+      };
       reader.readAsDataURL(fileInput.target.files[0]);
     }
   }
 
   submit() {
     if (this.form.valid) {
-      const formData = {...this.form.value}
-      console.log('Form data: ', formData);
-
+      const formData = {...this.form.value};
+      formData.image_data = this.imageBase64;
+      // console.log('Form data: ', formData);
+      // console.log(this.imageBase64);
+      this.http.post('http://localhost:3000/pet', formData)
+        .subscribe(
+          (response) => console.log(response),
+          (error) => console.log(error)
+        )
       this.form.reset();
       this.isImageSaved = false;
     }
