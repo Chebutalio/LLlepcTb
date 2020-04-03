@@ -1,14 +1,25 @@
 <mat-card class="pet-card" *ngFor="let pet of pets">
-  <img mat-card-image src="{{pet.image_data}}" alt="">
-  <mat-card-header>
-    <mat-card-title>{{pet.name}}</mat-card-title>
-    <mat-card-subtitle>{{pet.breed}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{pet.age}}</p>
-    <p>{{pet.sex}}</p>
-    <button mat-button>Деталі</button>
-  </mat-card-content>
+  <div class="image-container">
+    <ng-container *ngIf="!pet.image_data; else elseTemplate">
+      <img mat-card-image src="./../../assets/placeholder.png" alt="placeholder-image" class="card-image">
+    </ng-container>
+
+    <ng-template #elseTemplate>
+      <img mat-card-image src="{{pet.image_data}}" alt="pet-image" class="card-image">
+    </ng-template>
+
+  </div>
+  <div class="content-container">
+    <mat-card-header class="card-header">
+      <mat-card-title class="card-header__title">{{pet.name}}</mat-card-title>
+      <mat-card-subtitle class="card-header__subtitle">{{pet.breed}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <p class="card-content__par">{{"Вік: " + pet.age + " міс."}}</p>
+      <p class="card-content__par">{{"Стать: " + pet.sex}}</p>
+    </mat-card-content>
+    <button mat-raised-button color="accent">Деталі</button>
+  </div>
 </mat-card>
 
 <a mat-mini-fab routerLink="/adding" routerLinkActive="active" color="warn"
